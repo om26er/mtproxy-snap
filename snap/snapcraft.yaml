@@ -18,6 +18,7 @@ apps:
     plugs:
       - network
       - network-bind
+      - home
 
 parts:
   mtproxy:
