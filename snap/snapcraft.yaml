@@ -8,6 +8,10 @@ description: |
 grade: stable
 confinement: strict
 
+architectures:
+  - build-on: amd64
+  - build-on: i386
+
 apps:
   mtproxy:
     command: mtproto-proxy
@@ -18,7 +22,6 @@ apps:
 parts:
   mtproxy:
     plugin: nil
-    source: https://github.com/TelegramMessenger/MTProxy.git
     override-build: |
       snapcraftctl build
       git clone https://github.com/TelegramMessenger/MTProxy.git "${SNAPCRAFT_PART_INSTALL}/mtproxy"
