@@ -1,0 +1,35 @@
+name: mtproxy
+base: core18
+version: 'latest'
+summary: Simple MT-Proto proxy
+description: |
+  Simple MT-Proto proxy
+
+grade: stable
+confinement: strict
+
+apps:
+  mtproxy:
+    command: mtproto-proxy
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  mtproxy:
+    plugin: nil
+    source: https://github.com/TelegramMessenger/MTProxy.git
+    override-build: |
+      snapcraftctl build
+      git clone https://github.com/TelegramMessenger/MTProxy.git "${SNAPCRAFT_PART_INSTALL}/mtproxy"
+      cd "${SNAPCRAFT_PART_INSTALL}/mtproxy"
+      make -C "${SNAPCRAFT_PART_INSTALL}/mtproxy"
+      cp "${SNAPCRAFT_PART_INSTALL}/mtproxy/objs/bin/mtproto-proxy" "${SNAPCRAFT_PART_INSTALL}"
+      rm -r "${SNAPCRAFT_PART_INSTALL}/mtproxy"
+    build-packages:
+      - git
+      - curl
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - make
