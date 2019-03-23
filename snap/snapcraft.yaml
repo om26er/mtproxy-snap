@@ -1,5 +1,4 @@
 name: mtproxy
-base: core18
 version: 'latest'
 summary: Simple MT-Proto proxy
 description: |
